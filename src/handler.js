@@ -55,11 +55,42 @@ const addBookHandler = (request, h) => {
     return response;
 };
 
-const getAllBookHandler = () => {
+const getAllBookHandler = (request, h) => {
+    const { name, reading, finished } = request.query;
     let newBooks = [];
     let data = {};
 
-    if (books[0] !== undefined) {
+    if (name && books.filter((n) => n.name.toLowerCase().indexOf(name.toLowerCase()) > -1)) {
+        let withName = books.filter((n) => n.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+        withName.forEach((item,index,arr) => {
+            data = {
+                id: arr[index].id,
+                name: arr[index].name,
+                publisher: arr[index].publisher
+            }
+            newBooks.push(data);
+        });
+    } else if (parseInt(reading) === 0 || parseInt(reading) === 1) {
+        let withReading = books.filter((r) => r.reading === (parseInt(reading) === 1 ? true : false));
+        withReading.forEach((item,index,arr) => {
+            data = {
+                id: arr[index].id,
+                name: arr[index].name,
+                publisher: arr[index].publisher
+            }
+            newBooks.push(data);
+        });
+    } else if (parseInt(finished) === 0 || parseInt(finished) === 1) {
+        let withFinished = books.filter((r) => r.finished === (parseInt(finished) === 1 ? true : false));
+        withFinished.forEach((item,index,arr) => {
+            data = {
+                id: arr[index].id,
+                name: arr[index].name,
+                publisher: arr[index].publisher
+            }
+            newBooks.push(data);
+        });
+    } else if (books[0] !== undefined) {
         books.forEach((item,index,arr) => {
             data = {
                 id: arr[index].id,
