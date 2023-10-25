@@ -16,7 +16,7 @@
         "indent": ["error", 2],
         // we want to avoid extraneous spaces
         "no-multi-spaces": ["error"],
-        // we use LF, otomatis windows with CRLF
-        "linebreak-style": ["error", "unix"]
+        // we use LF, otomatis windows with LF
+        "linebreak-style": ["error", "windows"]
     }
 }
